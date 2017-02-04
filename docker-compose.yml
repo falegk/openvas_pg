@@ -1,0 +1,17 @@
+# Build image: docker-compose up --build
+# Bash: docker run --rm -it image_name:image_version bash -il
+version: '2'
+
+services:
+  openvas:
+    image: "openvas_pg:${VERSION}"
+    container_name: 'openvas_pg_container'
+    build: .
+    ports:
+      - '4000:4000'
+      - '7432:5432'
+    volumes:
+      - '.:/openvas_pg'
+    env_file:
+      - '.env'
+    tty: true
